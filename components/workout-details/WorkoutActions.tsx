@@ -2,34 +2,45 @@
 
 import { useState } from "react";
 import { Workout } from "../../types/workout";
-import {
-  addToPlan,
-  saveWorkout,
-} from "../../lib/storage/storage";
+import { addToPlan, saveWorkout } from "../../lib/storage/storage";
 
 interface WorkoutActionsProps {
   workout: Workout;
 }
 
-export default function WorkoutActions({
-  workout,
-}: WorkoutActionsProps) {
+export default function WorkoutActions({ workout }: WorkoutActionsProps) {
   const [planAdded, setPlanAdded] = useState(false);
   const [saved, setSaved] = useState(false);
 
   function handleAddToPlan() {
-    const added = addToPlan(workout);
+    try {
+      const result = addToPlan(workout);
 
-    if (added) {
-      setPlanAdded(true);
+      if (result) {
+        setPlanAdded(true);
+        window.dispatchEvent(new Event("fitlog-storage"));
+      } else {
+        setPlanAdded(true);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("ERROR: " + String(error));
     }
   }
 
   function handleSave() {
-    const added = saveWorkout(workout);
+    try {
+      const result = saveWorkout(workout);
 
-    if (added) {
-      setSaved(true);
+      if (result) {
+        setSaved(true);
+        window.dispatchEvent(new Event("fitlog-storage"));
+      } else {
+        setSaved(true);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("ERROR: " + String(error));
     }
   }
 
@@ -38,8 +49,7 @@ export default function WorkoutActions({
       <button
         type="button"
         onClick={handleAddToPlan}
-        disabled={planAdded}
-        className="rounded-[3px] bg-[#ccff00] px-5 py-3 text-[10px] font-black uppercase text-[#0b0c0e] disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex h-10 items-center justify-center rounded-[3px] bg-[#ccff00] px-5 text-[9px] font-black uppercase text-[#0b0c0e]"
       >
         {planAdded ? "Added to Plan" : "+ Add to today's plan"}
       </button>
@@ -47,10 +57,9 @@ export default function WorkoutActions({
       <button
         type="button"
         onClick={handleSave}
-        disabled={saved}
-        className="rounded-[3px] border border-[#44464c] px-5 py-3 text-[10px] font-black uppercase text-white disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex h-10 items-center justify-center rounded-[3px] border border-[#44464c] px-5 py-3 text-[10px] font-black uppercase text-white"
       >
-        {saved ? "Saved" : "? Save for later"}
+        {saved ? "Saved" : "Save for later"}
       </button>
     </div>
   );

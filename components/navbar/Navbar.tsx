@@ -2,17 +2,36 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getPlan, getSaved } from "../../lib/storage/storage";
 
 export default function Navbar() {
   const pathname = usePathname();
 
+  const [planCount, setPlanCount] = useState(0);
+  const [savedCount, setSavedCount] = useState(0);
+
   const workoutActive = pathname === "/";
   const planActive = pathname === "/my-plan";
+
+  useEffect(() => {
+    function updateCounts() {
+      setPlanCount(getPlan().length);
+      setSavedCount(getSaved().length);
+    }
+
+    updateCounts();
+
+    window.addEventListener("fitlog-storage", updateCounts);
+
+    return () => {
+      window.removeEventListener("fitlog-storage", updateCounts);
+    };
+  }, [pathname]);
 
   return (
     <header className="w-full bg-[#0b0c0e]">
       <nav className="relative mx-auto flex h-[81px] w-full max-w-[1232px] items-center border border-[#24262b] bg-[#101114] px-[16px]">
-        {/* Logo */}
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2"
@@ -75,7 +94,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Center Navigation */}
         <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 sm:flex">
           <Link
             href="/"
@@ -100,7 +118,6 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Right Counters */}
         <div className="ml-auto flex items-center gap-5">
           <Link
             href="/my-plan"
@@ -109,7 +126,7 @@ export default function Navbar() {
             <span>Plan</span>
 
             <span className="flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#ccff00] px-1 text-[9px] font-black leading-none text-[#0b0c0e]">
-              0
+              {planCount}
             </span>
           </Link>
 
@@ -120,13 +137,12 @@ export default function Navbar() {
             <span>Saved</span>
 
             <span className="flex h-[16px] min-w-[16px] items-center justify-center rounded-full border border-[#44464c] px-1 text-[9px] leading-none text-[#a7a9ae]">
-              0
+              {savedCount}
             </span>
           </Link>
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
       <div className="flex justify-center py-3 sm:hidden">
         <div className="flex items-center gap-1">
           <Link
