@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getWorkoutById } from "../../../lib/api";
+import WorkoutActions from "../../../components/workout-details/WorkoutActions";
 
 interface WorkoutDetailsPageProps {
   params: Promise<{
@@ -103,21 +104,7 @@ export default async function WorkoutDetailsPage({
               </ol>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                className="inline-flex h-10 items-center justify-center rounded-[3px] bg-[#ccff00] px-5 text-[9px] font-black uppercase text-[#0b0c0e]"
-              >
-                + Add to today's plan
-              </button>
-
-              <button
-                type="button"
-                className="inline-flex h-10 items-center justify-center rounded-[3px] border border-[#44464c] px-5 text-[9px] font-black uppercase text-white transition hover:border-[#ccff00] hover:text-[#ccff00]"
-              >
-                ? Save for later
-              </button>
-            </div>
+            <WorkoutActions workout={workout} />
           </div>
         </section>
       </div>
