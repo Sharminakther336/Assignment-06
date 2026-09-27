@@ -48,14 +48,25 @@ export default function MyPlanPage() {
 
   const currentItems = activeTab === "plan" ? plan : saved;
 
+  const totalMinutes = plan.reduce(
+    (total, workout) => total + workout.duration,
+    0
+  );
+
+  const totalCalories = plan.reduce(
+    (total, workout) => total + workout.caloriesBurned,
+    0
+  );
+
   return (
     <main className="min-h-screen bg-[#0b0c0e] px-6 py-10 text-white">
       <div className="mx-auto max-w-[1232px]">
         <PlanHeader />
 
         <PlanStats
-          planCount={plan.length}
-          savedCount={saved.length}
+          exercises={plan.length}
+          minutes={totalMinutes}
+          calories={totalCalories}
         />
 
         <PlanTabs

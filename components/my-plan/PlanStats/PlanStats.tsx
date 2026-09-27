@@ -1,31 +1,43 @@
 interface PlanStatsProps {
-  planCount: number;
-  savedCount: number;
+  exercises: number;
+  minutes: number;
+  calories: number;
 }
 
 export default function PlanStats({
-  planCount,
-  savedCount,
+  exercises,
+  minutes,
+  calories,
 }: PlanStatsProps) {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-4">
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
       <div className="border border-[#30343a] bg-[#15171c] px-5 py-5">
         <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-[#85878c]">
-          In Today's Plan
+          Exercises
         </p>
 
         <p className="mt-2 text-[28px] font-black leading-none text-[#ccff00]">
-          {planCount}
+          {exercises}
         </p>
       </div>
 
       <div className="border border-[#30343a] bg-[#15171c] px-5 py-5">
         <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-[#85878c]">
-          Saved For Later
+          Minutes
         </p>
 
         <p className="mt-2 text-[28px] font-black leading-none text-white">
-          {savedCount}
+          {minutes}
+        </p>
+      </div>
+
+      <div className="border border-[#30343a] bg-[#15171c] px-5 py-5">
+        <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-[#85878c]">
+          Calories
+        </p>
+
+        <p className="mt-2 text-[28px] font-black leading-none text-white">
+          {calories}
         </p>
       </div>
     </div>

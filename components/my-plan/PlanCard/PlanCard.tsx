@@ -1,7 +1,8 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Workout } from "../../../types/workout";
 
 interface PlanCardProps {
@@ -13,6 +14,12 @@ export default function PlanCard({
   workout,
   onRemove,
 }: PlanCardProps) {
+  const [done, setDone] = useState(false);
+
+  function handleDone() {
+    setDone(true);
+  }
+
   return (
     <div className="group overflow-hidden border border-[#30343a] bg-[#15171c]">
       <div className="relative h-[180px] w-full overflow-hidden bg-[#101114]">
@@ -42,25 +49,43 @@ export default function PlanCard({
         </h3>
 
         <p className="mt-1 text-[8px] text-[#85878c]">
-          {workout.duration} min / {workout.caloriesBurned} kcal
+          {workout.equipment}
         </p>
 
-        <div className="mt-4 flex gap-2">
+        <p className="mt-2 text-[8px] text-[#85878c]">
+          {workout.duration} min / {workout.caloriesBurned} kcal / ⭐{" "}
+          {workout.rating}
+        </p>
+
+        <div className="mt-4 grid grid-cols-2 gap-2">
           <Link
             href={`/workouts/${workout.id}`}
-            className="flex-1 border border-[#44464c] px-3 py-2 text-center text-[8px] font-black uppercase text-white transition hover:border-[#ccff00] hover:text-[#ccff00]"
+            className="border border-[#44464c] px-3 py-2 text-center text-[8px] font-black uppercase text-white transition hover:border-[#ccff00] hover:text-[#ccff00]"
           >
             View Details
           </Link>
 
           <button
             type="button"
-            onClick={() => onRemove(workout.id)}
-            className="border border-[#44464c] px-3 py-2 text-[8px] font-black uppercase text-[#85878c] transition hover:border-red-500 hover:text-red-400"
+            onClick={handleDone}
+            disabled={done}
+            className={`border px-3 py-2 text-[8px] font-black uppercase transition ${
+              done
+                ? "border-[#ccff00] text-[#ccff00]"
+                : "border-[#44464c] text-white hover:border-[#ccff00] hover:text-[#ccff00]"
+            }`}
           >
-            Remove
+            {done ? "✓ Done" : "✓ Mark as Done"}
           </button>
         </div>
+
+        <button
+          type="button"
+          onClick={() => onRemove(workout.id)}
+          className="mt-2 w-full border border-[#44464c] px-3 py-2 text-[8px] font-black uppercase text-[#85878c] transition hover:border-red-500 hover:text-red-400"
+        >
+          × Remove
+        </button>
       </div>
     </div>
   );
