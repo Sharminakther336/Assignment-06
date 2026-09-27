@@ -10,9 +10,8 @@ export default function Navbar() {
   const planActive = pathname === "/my-plan";
 
   return (
-    <header className="w-full bg-[#0b0c0e] px-4 pt-4 sm:px-6">
-      <nav className="mx-auto flex h-[64px] w-full max-w-[932px] items-center border border-[#24262b] bg-[#101114] px-5 sm:px-6">
-
+    <header className="w-full bg-[#0b0c0e]">
+      <nav className="relative mx-auto flex h-[81px] w-full max-w-[1232px] items-center border border-[#24262b] bg-[#101114] px-[16px]">
         {/* Logo */}
         <Link
           href="/"
@@ -80,7 +79,7 @@ export default function Navbar() {
         <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 sm:flex">
           <Link
             href="/"
-            className={`rounded-full px-4 py-[7px] text-[10px] font-bold uppercase tracking-[0.01em] transition ${
+            className={`rounded-full px-4 py-[7px] text-[10px] font-bold uppercase transition ${
               workoutActive
                 ? "bg-[#182500] text-[#ccff00]"
                 : "text-[#85878c] hover:text-white"
@@ -91,7 +90,7 @@ export default function Navbar() {
 
           <Link
             href="/my-plan"
-            className={`rounded-full px-4 py-[7px] text-[10px] font-bold uppercase tracking-[0.01em] transition ${
+            className={`rounded-full px-4 py-[7px] text-[10px] font-bold uppercase transition ${
               planActive
                 ? "bg-[#182500] text-[#ccff00]"
                 : "text-[#85878c] hover:text-white"
@@ -105,7 +104,7 @@ export default function Navbar() {
         <div className="ml-auto flex items-center gap-5">
           <Link
             href="/my-plan"
-            className="flex items-center gap-1.5 text-[10px] font-medium text-[#85878c] transition hover:text-white"
+            className="flex items-center gap-1.5 text-[10px] text-[#85878c] transition hover:text-white"
           >
             <span>Plan</span>
 
@@ -116,7 +115,7 @@ export default function Navbar() {
 
           <Link
             href="/my-plan"
-            className="flex items-center gap-1.5 text-[10px] font-medium text-[#85878c] transition hover:text-white"
+            className="flex items-center gap-1.5 text-[10px] text-[#85878c] transition hover:text-white"
           >
             <span>Saved</span>
 

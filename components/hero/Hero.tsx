@@ -3,16 +3,14 @@ import bannerImage from "../../assets/banner.png";
 
 export default function Hero() {
   return (
-    <section className="bg-[#0b0c0e] px-4 pt-3 sm:px-6">
-      <div className="mx-auto max-w-[932px]">
-        <div className="relative h-[296px] overflow-hidden bg-[#15171c]">
-          
-          {/* Dotted Border */}
+    <section className="bg-[#0b0c0e]">
+      <div className="mx-auto w-full max-w-[1232px]">
+        <div className="relative h-[448px] overflow-hidden bg-[#15171c]">
+          {/* Figma inner dashed border */}
           <div className="pointer-events-none absolute inset-[12px] border border-dashed border-[#344000]" />
 
+          {/* Hero Content */}
           <div className="relative flex h-full items-center px-[38px]">
-            
-            {/* Left Content */}
             <div className="relative z-10 w-[58%]">
               <p className="mb-[14px] text-[8px] font-bold uppercase tracking-[0.08em] text-[#ccff00]">
                 Workout Library
@@ -31,8 +29,9 @@ export default function Hero() {
               </h1>
 
               <p className="mt-[14px] max-w-[390px] text-[9px] leading-[1.5] text-[#85878c]">
-                FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
-                into today&apos;s plan, and watch the week&apos;s work add up.
+                FitLog is a dark, no-nonsense gym companion: pick a lift, lock
+                it into today&apos;s plan, and watch the week&apos;s work add
+                up.
               </p>
 
               <a
@@ -43,7 +42,7 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Banner Image */}
+            {/* Hero Image */}
             <div className="absolute right-[45px] top-1/2 h-[250px] w-[280px] -translate-y-1/2">
               <Image
                 src={bannerImage}
@@ -54,7 +53,6 @@ export default function Hero() {
                 sizes="280px"
               />
             </div>
-
           </div>
         </div>
       </div>
